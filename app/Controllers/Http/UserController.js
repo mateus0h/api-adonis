@@ -2,7 +2,6 @@
 
 const Database = use('Database')
 const User = use('App/Models/User')
-const UserAddress = use('App/Models/UserAddress')
 
 class UserController {
   async store ({ request }) {
