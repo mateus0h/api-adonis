@@ -48,18 +48,8 @@ class UserController {
         'roles'
       ])
 
-    // const { ...addresses } = request.input('addresses')
-
     const trx = await Database.beginTransaction()
-
     const user = await User.findOrFail(params.id, trx)
-    // const userAddress = await UserAddress.query()
-    //   .where({ user_id: params.id })
-    //   .fetch(trx)
-
-    // userAddress.merge(addresses)
-    // await userAddress.save()
-
     user.merge(data)
     await user.save()
 
