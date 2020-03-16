@@ -3,12 +3,20 @@
 const Project = use('App/Models/Project')
 
 class ProjectController {
-  async index ({ request }) {
-    const { page } = request.get()
+  async index ({ request, auth }) {
+    const user = await auth.getUser()
 
-    const projects = await Project.query()
-      .with('user')
-      .paginate(page)
+    if (await user.can('read_private_project')) {
+      const { page } = request.get()
+
+      const projects = await Project.query()
+        .with('user')
+        .paginate(page)
+
+      return projects
+    }
+
+    const projects = await Project.query().where({ description: 'public' }).fetch()
 
     return projects
   }

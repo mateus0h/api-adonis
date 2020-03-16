@@ -10,7 +10,7 @@ class Project {
   get rules () {
     return {
       title: 'required',
-      descripition: 'required'
+      description: 'required'
     }
   }
 
